@@ -24,6 +24,8 @@ Filter used --> `tcp.port == 9002`
 
 Now,when we follow stream on this conversation we get a salted hash and some unreadable characters in it because not everything is printable.
 
+![flag output](salted_hash.PNG)
+
 We can save that packet's contents as raw and save it to file in the file system.I saved that hash to `salted.des`.
 
 Now we can just decrypt the hash using the command used in the conversation earlier using openssl.
