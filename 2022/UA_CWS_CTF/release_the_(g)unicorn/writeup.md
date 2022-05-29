@@ -20,7 +20,7 @@ When we visit it,we say that it is forbidden.
 
 This is because we have a haproxy.cfg which denies any requests which come to a path which has 'flag' in it.
 
-![deny regex](regex_deny.PNG)
+![deny regex](regex_deny.png)
 
 Googling about haproxy says that it is a load balancer/reverse proxy.So our architecture looks somewhat like this probably.
 
@@ -47,9 +47,12 @@ The below link gives a POC on how gunicorn is vulnerable because of the `Sec-Web
 We take the payload used in the link and change the content-length header.The content-length we finally get is 81.
 `Note: Be careful when calculating the \r and \n bytes during newlines`
 
+
 ![payload](payload2.PNG)
 `Note: We can also create the payload using the printf command instead of echo`
 
+
 We run the command and we get the flag as shown below.
 ![flag](flag.PNG)
+
 `Note: The request sometimes gives out a invalid method error.Run it a few times to get the flag`
