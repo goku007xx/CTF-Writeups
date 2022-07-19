@@ -16,7 +16,7 @@ The goal should should be to find a button which is different from the normal on
 
 We can use curl and grep to see if there is any different output than what is observed.  
 
-![Curl](D:\CTF_Writeups\CTF-Writeups\2022\imaginaryctf-2022\buttons\curl_output.PNG)
+![Curl](curl_output.PNG)
 
 
 
