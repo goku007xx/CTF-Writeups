@@ -6,9 +6,9 @@ Challenge Description:
 
 
 
-### <u>Analyzing The Website</u>
+### Analyzing The Website
 
-Viewing the source code of the challenge gives us various buttons which calls the ***notSusFunction***().  
+Viewing the source code of the challenge gives us various buttons which calls the `***notSusFunction***()`.  
 
 <img src="buttons.PNG" alt="Source Code" style="zoom: 80%;" />
 
@@ -20,7 +20,7 @@ We can use curl and grep to see if there is any different output than what is ob
 
 
 
-We see that there is a button which calls the **motSusfunction()** which probably prints the flag.  
+We see that there is a button which calls the `**motSusfunction()**` which probably prints the flag.  
 
 We can just click on this button in the webpage which should give us the flag.  
 
