@@ -10,13 +10,13 @@ Challenge Description:
 
 Viewing the source code of the challenge gives us various buttons which calls the `***notSusFunction***()`.  
 
-<img src="buttons.PNG" alt="Source Code" style="zoom: 80%;" />
+![Source Code](D:\CTF_Writeups\CTF-Writeups\2022\imaginaryctf-2022\buttons\buttons.PNG)
 
 The goal should should be to find a button which is different from the normal ones shown above.  
 
 We can use curl and grep to see if there is any different output than what is observed.  
 
-![Curl](curl_output.PNG)
+![Curl](D:\CTF_Writeups\CTF-Writeups\2022\imaginaryctf-2022\buttons\curl_output.PNG)
 
 
 
