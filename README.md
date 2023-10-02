@@ -1,5 +1,5 @@
 # CTF-Writeups
-Writeups of some challenges in participated CTF's
+These are some of the writeups of challenges in participated CTF's.
 
 ## CTFS Added 
 
